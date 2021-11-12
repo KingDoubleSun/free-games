@@ -1,11 +1,17 @@
 import Navigator from "./Navigator";
+import Head from "next/head";
 
 const Layout = ({ children }) => {
   return (
-    <div className="bg-dark">
-      <Navigator />
-      {children}
-    </div>
+    <>
+      <Head>
+        <body className="bg-dark" />
+      </Head>
+      <div>
+        <Navigator />
+        {children}
+      </div>
+    </>
   );
 };
 

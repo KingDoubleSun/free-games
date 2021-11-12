@@ -1,9 +1,14 @@
 import ListGroup from "react-bootstrap/ListGroup";
-import FilterItem from "./FilterItem";
-import { RiArrowDropDownLine } from "react-icons/ri";
-const Filter = ({ addFilter }) => {
-  const platforms = ["PC", "Browser"];
-  const genres = [
+import FilterList from "./FilterList";
+import { useState } from "react";
+import { BsFilter } from "react-icons/bs";
+
+function toggle(value) {
+  return Math.abs(value - 1);
+}
+const filter_lists = {
+  platform: ["PC", "Browser"],
+  category: [
     "MMO",
     "MMORPG",
     "Shooter",
@@ -15,40 +20,76 @@ const Filter = ({ addFilter }) => {
     "Sports",
     "Social",
     "Fighting",
-  ];
+  ],
+  graphics: ["2D", "3D"],
+  combat: ["PVE", "PVP"],
+  setting: ["Anime", "Fantasy", "Sci-Fi", "Military", "Horror"],
+  tags: [
+    "MMOFPS",
+    "Sandbox",
+    "Open-World",
+    "Survival",
+    "Action-RPG",
+    "MMORTS",
+    "Pixel",
+    "Voxel",
+    "MMOTPS",
+    "Zombie",
+    "First-Person",
+    "Top-Down",
+    "Tank",
+    "Space",
+    "Sailing",
+    "Side-Scroller",
+    "Superhero",
+    "Permadeath",
+    "Action",
+    "Martial-Arts",
+    "Flight",
+    "Low-Spec",
+  ],
+};
+
+const Filter = ({ addFilter }) => {
+  const [display, setDisplay] = useState({
+    platform: 1,
+    category: 1,
+    graphics: 1,
+    combat: 1,
+    setting: 1,
+    tags: 1,
+  });
+
+  const [reset, setReset] = useState(0);
+  function hideList(type) {
+    setDisplay((old) => ({ ...old, [type]: toggle(old[type]) }));
+  }
 
   return (
-    <div>
+    <div className="fixed">
       <ListGroup.Item className="fw-bold fs-3 bg-dark text-white border-0 mt-2">
-        Filter
+        Filter <BsFilter size={40} />{" "}
+        <button
+          onClick={() => {
+            setReset(reset + 1);
+          }}
+        >
+          reset
+        </button>
       </ListGroup.Item>
-      {/* <h4 className="fw-bold text-white ml-5 mt-2"></h4> */}
-      <ListGroup className="mt-5">
-        <ListGroup.Item className="fw-bold fs-5 bg-dark text-grey border-0">
-          Platform <RiArrowDropDownLine size={40} />
-        </ListGroup.Item>
-        {platforms.map((item) => (
-          <FilterItem
-            key={item}
-            condition={"platform"}
-            value={item}
+      {Object.keys(filter_lists).map((key) => {
+        return (
+          <FilterList
+            key={key}
+            name={key}
+            items={filter_lists[key]}
+            hide={hideList}
+            display={display[key]}
             addFilter={addFilter}
+            reset={reset}
           />
-        ))}
-      </ListGroup>
-      <ListGroup className="mt-5">
-        <ListGroup.Item className="fw-bold fs-5 bg-dark text-grey border-0">
-          Categories
-        </ListGroup.Item>
-        {genres.map((item) => (
-          <FilterItem
-            key={item}
-            condition={"category"}
-            value={item}
-            addFilter={addFilter}
-          />
-        ))}
-      </ListGroup>
+        );
+      })}
     </div>
   );
 };

@@ -1,6 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Nunito:wght@300&display=swap");
+
+.fixed {
+  width: 200px;
+}
+
 .pagination > li > a {
   background-color: #282c34;
   color: white;
+}
+
+.card-header {
+  font-family: "Noto Sans", sans-serif;
 }
 
 .card-img {
@@ -10,6 +20,14 @@
 .card:hover > .card-img {
   transform: scale(1.05);
   opacity: 0.6;
+}
+
+.sort-font {
+  font-family: Nunito;
+}
+
+.list-group-item {
+  font-family: Nunito;
 }
 
 .list-group-item.text-grey {

@@ -1,7 +1,6 @@
 import axios from "axios";
 import GameCardGroup from "../components/GameCardGroup";
 import PageSystem from "../components/PageSystem";
-import Navigator from "../components/Navigator";
 import Filter from "../components/Filter";
 import Sort from "../components/Sort";
 import { useState, useEffect } from "react";
@@ -87,10 +86,7 @@ export default function Home() {
 
   return (
     <div className="container">
-      <div className="col-2 mt-3 text-white">
-        Sort By:
-        <Sort changeCondition={changeSortCondition} />
-      </div>
+      <Sort changeCondition={changeSortCondition} />
 
       <div className="row">
         <div className="col-10">

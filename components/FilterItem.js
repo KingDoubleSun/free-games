@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { TiTick } from "react-icons/ti";
 
-const FilterItem = ({ condition, value, addFilter }) => {
+const FilterItem = ({ condition, value, addFilter, reset }) => {
   const [active, setActive] = useState(false);
 
   function click_event(condition, method) {
     addFilter(method, condition, value);
     setActive(!active);
   }
+
+  useEffect(() => {
+    setActive(0);
+  }, [reset]);
 
   // return highlighted list item
   if (active) {
