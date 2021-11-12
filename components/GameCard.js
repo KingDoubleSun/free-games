@@ -1,5 +1,6 @@
 import Card from "react-bootstrap/Card";
 import Placeholder from "react-bootstrap/Placeholder";
+import { CgWindows, CgBrowser } from "react-icons/cg";
 
 export default function GameCard({ data, loading }) {
   if (loading) {
@@ -24,7 +25,7 @@ export default function GameCard({ data, loading }) {
       text="white"
       bg="dark"
       boader="light"
-      className="click"
+      className="click shadow border-0"
       style={{ cursor: "pointer" }}
       onClick={() => window.open(data["freetogame_profile_url"], "_external")}
     >
@@ -34,10 +35,24 @@ export default function GameCard({ data, loading }) {
         <Card.Text className="fw-lighter fs-6 text-truncate text-light">
           {data["publisher"]} | {data["developer"]}
         </Card.Text>
-        <Card.Footer className="fw-light fs-6 text-white">
-          {data["release_date"]}
-        </Card.Footer>
       </Card.Body>
+      <Card.Footer className="fw-light fs-8 text-white">
+        <div className="d-flex justify-content-between">
+          {data["release_date"]}
+        </div>
+      </Card.Footer>
+      <Card.Footer className="fw-light fs-8 text-white">
+        <div className="d-flex justify-content-between">
+          <span className="badge badge-secondary bg-secondary">
+            {data["genre"]}
+          </span>
+          {data["platform"] === "PC (Windows)" ? (
+            <CgWindows size={20} />
+          ) : (
+            <CgBrowser size={20} />
+          )}
+        </div>
+      </Card.Footer>
     </Card>
   );
 }

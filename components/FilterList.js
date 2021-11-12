@@ -19,17 +19,16 @@ const FilterList = ({ name, items, hide, display, addFilter, reset }) => {
           <RiArrowDropUpLine size={40} />
         )}
       </ListGroup.Item>
-      {display
-        ? items.map((item) => (
-            <FilterItem
-              key={item}
-              condition={name === "platform" ? "platform" : "category"}
-              value={item}
-              addFilter={addFilter}
-              reset={reset}
-            />
-          ))
-        : null}
+      {items.map((item) => (
+        <FilterItem
+          key={item}
+          condition={name === "platform" ? "platform" : "category"}
+          value={item}
+          addFilter={addFilter}
+          display={display}
+          reset={reset}
+        />
+      ))}
     </ListGroup>
   );
 };

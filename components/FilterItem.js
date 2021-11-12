@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { TiTick } from "react-icons/ti";
 
-const FilterItem = ({ condition, value, addFilter, reset }) => {
+const FilterItem = ({ condition, value, addFilter, display, reset }) => {
   const [active, setActive] = useState(false);
 
   function click_event(condition, method) {
@@ -13,6 +13,10 @@ const FilterItem = ({ condition, value, addFilter, reset }) => {
   useEffect(() => {
     setActive(0);
   }, [reset]);
+
+  if (!display) {
+    return null;
+  }
 
   // return highlighted list item
   if (active) {

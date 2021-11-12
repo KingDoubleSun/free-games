@@ -4,6 +4,7 @@ import PageSystem from "../components/PageSystem";
 import Filter from "../components/Filter";
 import Sort from "../components/Sort";
 import { useState, useEffect } from "react";
+import Head from "next/head";
 
 export default function Home() {
   const GAMES_PER_PAGE = 24;
@@ -41,6 +42,7 @@ export default function Home() {
       setGames(data);
       setTimeout(() => {
         setLoading(false);
+        window.scrollTo(0, 0);
       }, 500);
     };
     fetchGames();
@@ -61,21 +63,28 @@ export default function Home() {
 
   // variables and functions for change filters
   function addFilter(method, condition, value) {
-    if (method === "remove") {
-      if (condition === "category")
-        setFilterCategory((old) =>
-          old.filter((item) => item !== value.toLowerCase())
-        );
-      else if (condition === "platform")
-        setFilterPlatform((old) =>
-          old.filter((item) => item !== value.toLowerCase())
-        );
-    } else if (method === "add") {
-      setCurrentpage(1);
-      if (condition === "category")
-        setFilterCategory((old) => [...old, value.toLowerCase()]);
-      else if (condition === "platform")
-        setFilterPlatform((old) => [...old, value.toLowerCase()]);
+    switch (method) {
+      case "remove":
+        if (condition === "category")
+          setFilterCategory((old) =>
+            old.filter((item) => item !== value.toLowerCase())
+          );
+        else if (condition === "platform")
+          setFilterPlatform((old) =>
+            old.filter((item) => item !== value.toLowerCase())
+          );
+        break;
+      case "add":
+        setCurrentpage(1);
+        if (condition === "category")
+          setFilterCategory((old) => [...old, value.toLowerCase()]);
+        else if (condition === "platform")
+          setFilterPlatform((old) => [...old, value.toLowerCase()]);
+        break;
+      case "reset":
+        setFilterCategory([]);
+        setFilterPlatform([]);
+        break;
     }
   }
 
@@ -85,29 +94,34 @@ export default function Home() {
   }
 
   return (
-    <div className="container">
-      <Sort changeCondition={changeSortCondition} />
+    <>
+      <Head>
+        <title>Free Games | Home</title>
+      </Head>
+      <div className="container">
+        <Sort changeCondition={changeSortCondition} />
 
-      <div className="row">
-        <div className="col-10">
-          <GameCardGroup
-            games_per_page={GAMES_PER_PAGE}
-            dataSet={displayed_games}
-            loading={loading}
-          />
-          <div className="d-flex justify-content-center">
-            <PageSystem
-              current_page={currentpage}
+        <div className="row">
+          <div className="col-10">
+            <GameCardGroup
               games_per_page={GAMES_PER_PAGE}
-              data_length={games.length}
-              paginate={paginate}
+              dataSet={displayed_games}
+              loading={loading}
             />
+            <div className="d-flex justify-content-center">
+              <PageSystem
+                current_page={currentpage}
+                games_per_page={GAMES_PER_PAGE}
+                data_length={games.length}
+                paginate={paginate}
+              />
+            </div>
+          </div>
+          <div className="col-2">
+            <Filter addFilter={addFilter} />
           </div>
         </div>
-        <div className="col-2">
-          <Filter addFilter={addFilter} />
-        </div>
       </div>
-    </div>
+    </>
   );
 }

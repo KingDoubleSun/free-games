@@ -68,15 +68,24 @@ const Filter = ({ addFilter }) => {
   return (
     <div className="fixed">
       <ListGroup.Item className="fw-bold fs-3 bg-dark text-white border-0 mt-2">
-        Filter <BsFilter size={40} />{" "}
-        <button
-          onClick={() => {
-            setReset(reset + 1);
-          }}
-        >
-          reset
-        </button>
+        <div className="row">
+          <div className="col-8">
+            Filter <BsFilter size={40} />
+          </div>
+          <div className="col-4">
+            <button
+              className="fw-bold fs-5 btn btn-secondary"
+              onClick={() => {
+                setReset(reset + 1);
+                addFilter("reset");
+              }}
+            >
+              Reset
+            </button>
+          </div>
+        </div>
       </ListGroup.Item>
+
       {Object.keys(filter_lists).map((key) => {
         return (
           <FilterList

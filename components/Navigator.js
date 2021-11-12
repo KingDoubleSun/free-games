@@ -5,10 +5,10 @@ const Navigator = () => {
   return (
     <Navbar sticky="top" bg="dark" variant="dark">
       <div className="container border-bottom border-secondary">
-        <Navbar.Brand href="#home">Free Games</Navbar.Brand>
+        <Navbar.Brand href="/">Free Games</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#insights">Insights</Nav.Link>
+          <Nav.Link href="/">Home</Nav.Link>
+          <Nav.Link href="insights">Insights</Nav.Link>
         </Nav>
       </div>
     </Navbar>
