@@ -1,8 +1,8 @@
 import axios from "axios";
-import GameCardGroup from "../components/GameCardGroup";
-import PageSystem from "../components/PageSystem";
-import Filter from "../components/Filter";
-import Sort from "../components/Sort";
+import GameCardGroup from "../components/explore/GameCardGroup";
+import PageSystem from "../components/explore/PageSystem";
+import Filter from "../components/explore/Filter";
+import Sort from "../components/explore/Sort";
 import { useState, useEffect } from "react";
 import Head from "next/head";
 
@@ -37,7 +37,7 @@ export default function Home() {
     const fetchGames = async () => {
       setLoading(true);
       const res = await axios.request(options);
-      // status 201, no games foud
+      // status 201, no games found
       const data = res["status"] !== 201 ? res["data"] : [];
       setGames(data);
       setTimeout(() => {
