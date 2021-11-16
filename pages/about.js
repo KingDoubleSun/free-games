@@ -9,12 +9,19 @@ export default function About() {
       <div className="container text-white p-5 sort-font fs-3 p-indent">
         <p>
           This web app is built based on the API provided by the{" "}
-          <a href="https://www.freetogame.com/api-doc/">Free-To-Game</a>{" "}
+          <a href={process.env.NEXT_PUBLIC_ORIGINAL_SITE} target="_blank">
+            Free-To-Game
+          </a>{" "}
           website, and some details of each specific game information are
           dynamically scraped from the{" "}
-          <a href="https://www.freetogame.com/api-doc/">Free-To-Game</a> website
-          as well, the scrape code is available in{" "}
-          <a href="">my github repository</a>.
+          <a href={process.env.NEXT_PUBLIC_ORIGINAL_SITE} target="_blank">
+            Free-To-Game
+          </a>{" "}
+          website as well, the scrape code is available in{" "}
+          <a href={process.env.NEXT_PUBLIC_GIT_HUB} target="_blank">
+            my github repository
+          </a>
+          .
         </p>
 
         <p className="mt-5">

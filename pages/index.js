@@ -29,8 +29,8 @@ export default function Home() {
         "sort-by": sortCondition,
       },
       headers: {
-        "x-rapidapi-host": "free-to-play-games-database.p.rapidapi.com",
-        "x-rapidapi-key": "5bf162546cmsh7125237bb311b0fp1c906fjsn76a33950d8fb",
+        "x-rapidapi-host": process.env.NEXT_PUBLIC_HOST_NAME,
+        "x-rapidapi-key": process.env.NEXT_PUBLIC_API_KEY,
       },
     };
 

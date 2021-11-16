@@ -92,7 +92,7 @@ export async function getServerSideProps(context) {
 
   // Fetch data from python server API to scrape more details
   try {
-    const res = await axios.get(`http://localhost:3000/api/${id}`);
+    const res = await axios.get(`${process.env.LOCAL_API}${id}`);
     data = res["data"];
   } catch (err) {
     console.error(err.message);
