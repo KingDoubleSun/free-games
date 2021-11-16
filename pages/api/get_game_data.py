@@ -16,7 +16,6 @@ def get_game_data(url, headers):
         video = soup.find('video')
         game_data['video_src'] = base_url + video.source["src"]
     except TypeError:
-        print("no video", url)
         game_data['video_src'] = None
 
     # screenshots <div class="row text-center text-lg-left"> <a href=>
@@ -24,7 +23,7 @@ def get_game_data(url, headers):
         screenshots = soup.find('div', {'class': "row text-center text-lg-left"}).find_all('a')
         game_data["screenshots"] = [base_url + a["href"] for a in screenshots]
     except AttributeError:
-        print("no screenshots", url)
+        game_data["screenshots"] = []
 
     # pc requirements
     try:
@@ -45,7 +44,6 @@ def get_game_data(url, headers):
                     requirements = sibling.find_all('p')
                     game_data["system_requirements"] = '\n'.join([e.get_text() for e in requirements])
     except AttributeError:
-        print("No system req", url)
         game_data["system_requirements"] = None
 
     return json.dumps(game_data)

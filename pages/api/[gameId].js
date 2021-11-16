@@ -1,11 +1,9 @@
-const express = require("express");
 const axios = require("axios");
 const { spawn } = require("child_process");
-const app = express();
 
-app.get("/:game_id", async (req, res) => {
-  const PYTHON_CODE = "get_game_data.py";
-  const game_id = req.params.game_id;
+const handler = async (req, res) => {
+  const PYTHON_CODE = "./pages/api/get_game_data.py";
+  const game_id = req.query.gameId;
   var options = {
     method: "GET",
     url: "https://free-to-play-games-database.p.rapidapi.com/api/game",
@@ -22,20 +20,16 @@ app.get("/:game_id", async (req, res) => {
     const childPython = spawn("python", [PYTHON_CODE, game_url]);
     childPython.stdout.on("data", (data) => {
       const scraped_data = JSON.parse(`${data}`);
-      res.send(JSON.stringify({ ...response["data"], ...scraped_data }));
+      return res.status(200).send({ ...response["data"], ...scraped_data });
     });
 
     childPython.stderr.on("data", (data) => {
       console.error(`stderr: ${data}`);
-      res.sendStatus(500);
-    });
-
-    childPython.on("close", (code) => {
-      console.log(`child process exited with code ${code}`);
+      res.status(500).json({ message: "internal server error" });
     });
   } catch (err) {
-    res.sendStatus(404);
+    res.status(404).json({ message: "page not found" });
   }
-});
+};
 
-app.listen(3001);
+export default handler;

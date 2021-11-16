@@ -18,7 +18,7 @@ const FilterItem = ({ condition, value, addFilter, display, reset }) => {
     return null;
   }
 
-  // return highlighted list item
+  // return highlighted active ticked list item
   if (active) {
     return (
       <ListGroup.Item

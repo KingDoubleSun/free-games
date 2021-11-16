@@ -1,16 +1,17 @@
 import Navigator from "./Navigator";
-import Head from "next/head";
+import Loader from "./Loader";
+import { useEffect } from "react";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, loading }) => {
+  // keep document body background dark
+  useEffect(() => {
+    document.querySelector("body").classList.add("bg-dark");
+  });
   return (
     <>
-      <Head>
-        <body className="bg-dark" />
-      </Head>
-      <div>
-        <Navigator />
-        {children}
-      </div>
+      <Navigator />
+      {loading ? <Loader loading={loading} /> : null}
+      {children}
     </>
   );
 };

@@ -29,7 +29,6 @@ export default function GameCard({ data, loading }) {
         boader="light"
         className="click shadow border-0"
         style={{ cursor: "pointer" }}
-        // onClick={() => window.open(data["freetogame_profile_url"], "_external")}
       >
         <Card.Img src={data["thumbnail"]} />
         <Card.Header className="fs-5 text-truncate">

@@ -2,6 +2,9 @@ import ListGroup from "react-bootstrap/ListGroup";
 
 export default function TwoColumnLists({ list }) {
   // split one list of items to a two-column lists
+  if (!list) {
+    return null;
+  }
   const titles = Object.keys(list);
   const half_index = Math.ceil(titles.length / 2);
   return (
@@ -18,10 +21,12 @@ export default function TwoColumnLists({ list }) {
                   <ListGroup.Item
                     key={i}
                     as="li"
-                    className="d-flex justify-content-between align-items-start text-white bg-dark border-0"
+                    className="d-flex justify-content-between bg-dark align-items-start text-white border-0"
                   >
                     <div className="ms-2 me-auto">
-                      <div className="fw-bold text-capitalize">{title}</div>
+                      <div className="fw-bold text-capitalize text-muted">
+                        {title}
+                      </div>
                       {list[title]}
                     </div>
                   </ListGroup.Item>

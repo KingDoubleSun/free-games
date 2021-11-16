@@ -6,7 +6,7 @@ import { BsFilter } from "react-icons/bs";
 function toggle(value) {
   return Math.abs(value - 1);
 }
-const filter_lists = {
+const FLITER_LISTS = {
   platform: ["PC", "Browser"],
   category: [
     "MMO",
@@ -50,6 +50,7 @@ const filter_lists = {
   ],
 };
 
+// records if display the corresponding filter list
 const Filter = ({ addFilter }) => {
   const [display, setDisplay] = useState({
     platform: 1,
@@ -66,15 +67,15 @@ const Filter = ({ addFilter }) => {
   }
 
   return (
-    <div className="fixed">
+    <div className="overflow-auto">
       <ListGroup.Item className="fw-bold fs-3 bg-dark text-white border-0 mt-2">
         <div className="row">
-          <div className="col-8">
+          <div className="col-6">
             Filter <BsFilter size={40} />
           </div>
-          <div className="col-4">
+          <div className="col-6">
             <button
-              className="fw-bold fs-5 btn btn-secondary"
+              className="fw-bold fs-5 btn btn-sm btn-secondary overflow-hidden"
               onClick={() => {
                 setReset(reset + 1);
                 addFilter("reset");
@@ -86,12 +87,12 @@ const Filter = ({ addFilter }) => {
         </div>
       </ListGroup.Item>
 
-      {Object.keys(filter_lists).map((key) => {
+      {Object.keys(FLITER_LISTS).map((key) => {
         return (
           <FilterList
             key={key}
             name={key}
-            items={filter_lists[key]}
+            items={FLITER_LISTS[key]}
             hide={hideList}
             display={display[key]}
             addFilter={addFilter}

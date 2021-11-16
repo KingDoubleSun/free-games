@@ -10,14 +10,16 @@ const FilterList = ({ name, items, hide, display, addFilter, reset }) => {
         onClick={() => {
           hide(name);
         }}
-        className="fw-bold fs-5 bg-dark text-grey text-capitalize border-0"
+        className="fw-bold fs-5 bg-dark text-grey text-capitalize border-0 d-flex justify-content-between"
       >
-        {name}{" "}
-        {display ? (
-          <RiArrowDropDownLine size={40} />
-        ) : (
-          <RiArrowDropUpLine size={40} />
-        )}
+        <div>{name}</div>
+        <div>
+          {display ? (
+            <RiArrowDropDownLine size={40} />
+          ) : (
+            <RiArrowDropUpLine size={40} />
+          )}
+        </div>
       </ListGroup.Item>
       {items.map((item) => (
         <FilterItem

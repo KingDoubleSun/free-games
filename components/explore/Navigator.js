@@ -1,14 +1,21 @@
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import Link from "next/link";
 
 const Navigator = () => {
   return (
-    <Navbar sticky="top" bg="dark" variant="dark">
+    <Navbar sticky="top" bg="dark" variant="dark" className="navbar-expand-lg">
       <div className="container border-bottom border-secondary">
-        <Navbar.Brand href="/">Free Games</Navbar.Brand>
+        <Link href="/">
+          <a className="navbar-brand">Free Games</a>
+        </Link>
         <Nav className="me-auto">
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="insights">Insights</Nav.Link>
+          <Link href="/">
+            <a className="nav-link">Home</a>
+          </Link>
+          <Link href="/about">
+            <a className="nav-link">About</a>
+          </Link>
         </Nav>
       </div>
     </Navbar>

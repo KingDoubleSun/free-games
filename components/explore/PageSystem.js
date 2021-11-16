@@ -9,6 +9,7 @@ export default function PageSystem({
   // don't return pagination bar if there is no games to diplay
   if (data_length === 0) return <></>;
 
+  // calculate how many pages to show in the pagination
   let items = [];
   let last_page = Math.ceil(data_length / games_per_page);
   for (let number = 1; number <= last_page; number++) {
@@ -23,7 +24,7 @@ export default function PageSystem({
     );
   }
   return (
-    <Pagination bsPrefix="pagination bg-dark">
+    <Pagination bsPrefix="pagination bg-dark overflow-auto">
       <Pagination.First onClick={() => paginate(1)} />
       <Pagination.Prev
         onClick={() => paginate(Math.max(current_page - 1, 1))}

@@ -42,7 +42,6 @@ export default function Home() {
       setGames(data);
       setTimeout(() => {
         setLoading(false);
-        window.scrollTo(0, 0);
       }, 500);
     };
     fetchGames();
@@ -102,7 +101,7 @@ export default function Home() {
         <Sort changeCondition={changeSortCondition} />
 
         <div className="row">
-          <div className="col-10">
+          <div className="col-9">
             <GameCardGroup
               games_per_page={GAMES_PER_PAGE}
               dataSet={displayed_games}
@@ -117,7 +116,7 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="col-2">
+          <div className="col-3">
             <Filter addFilter={addFilter} />
           </div>
         </div>
